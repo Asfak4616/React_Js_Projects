@@ -2,11 +2,11 @@ import React from 'react'
 import Navbar from './Navbar'
 import PageOne from './PageOne'
 
-const SectionOne = () => {
+const SectionOne = (props) => {
   return (
     <div className=' h-screen w-full '>
       <Navbar/>
-      <PageOne/>
+      <PageOne users={props.users} />
     </div>
   )
 }
