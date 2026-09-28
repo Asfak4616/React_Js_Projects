@@ -11,39 +11,39 @@ const Category = [
 {
     id:1,
     name:"All",
-    icon:<RiGalleryView2 className="text-orange-500 text-4xl"/>
+    icon:<RiGalleryView2 className="text-orange-500 text-5xl "/>
 }
 ,
 {
     id:2,
     name:"Breakfast",
-    icon:<MdOutlineFreeBreakfast  className="text-orange-500 text-4xl"/>
+    icon:<MdOutlineFreeBreakfast  className="text-orange-500 text-5xl"/>
 }
 ,
 {
     id:3,
     name:"Soups",
-    icon:<LuSoup className="text-orange-500 text-4xl" />
+    icon:<LuSoup className="text-orange-500 text-5xl" />
 },
 {
     id:4,
     name:"Pasta",
-    icon:<CiBowlNoodles className="text-orange-500 text-4xl"/>
+    icon:<CiBowlNoodles className="text-orange-500 text-5xl"/>
 },
 {
     id:5,
     name:"Main_Course",
-    icon:<MdOutlineFoodBank className="text-orange-500 text-3xl"/>
+    icon:<MdOutlineFoodBank className="text-orange-500 text-5xl"/>
 },
 {
     id:6,
     name:"Pizza",
-    icon:<GiFullPizza className="text-orange-500 text-4xl"/>
+    icon:<GiFullPizza className="text-orange-500 text-5xl"/>
 },
 {
     id:7,
     name:"Burger",
-    icon:<PiHamburgerBold className="text-orange-500 text-4xl"/>
+    icon:<PiHamburgerBold className="text-orange-500 text-5xl"/>
 },
 ]
 

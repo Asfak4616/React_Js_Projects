@@ -8,7 +8,7 @@ const Navbar = () => {
       <div className="w-13 h-13 bg-white flex justify-center items-center rounded-md shadow-md">
         <IoFastFoodOutline className="text-3xl text-orange-500 " />
       </div>
-      <form className="bg-white h-13 w-[70%] rounded flex items-center gap-5 shadow-md pl-4">
+      <form className="bg-white h-13 w-[40%] md:w-[70%] rounded flex items-center gap-5 shadow-md pl-4">
         <IoSearch className="text-2xl text-orange-500" />
         <input
           className="outline-none w-full"
@@ -17,7 +17,7 @@ const Navbar = () => {
         />
       </form>
       <div className="w-13 h-13 bg-white flex justify-center items-center rounded-md shadow-md  relative">
-        <span className="absolute top-0 right-0 font-bold text-green-500"></span>
+        <span className="absolute top-0 right-1 font-bold text-orange-500">0</span>
         
         <TiShoppingCart className="text-3xl text-orange-500 " />
       </div>
