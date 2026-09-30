@@ -32,7 +32,7 @@ const Category = [
 },
 {
     id:5,
-    name:"Main_Course",
+    name:"main_Course",
     icon:<MdOutlineFoodBank className="text-orange-500 text-5xl"/>
 },
 {
