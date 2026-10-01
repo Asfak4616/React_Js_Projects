@@ -7,7 +7,7 @@ import { dataContext } from "../Context/UseContextData";
 import { RxCross2 } from "react-icons/rx";
 
 const Home = () => {
-  const { categories, setCategories, inputData } = useContext(dataContext);
+  const { categories, setCategories, inputData ,showCard,setShowCard} = useContext(dataContext);
   function filter(category) {
     if (category == "All") {
       setCategories(food_items);
@@ -62,10 +62,12 @@ const Home = () => {
 
       {/* Shopping Card rendering */}
 
-      <div className="bg-white w-[35vw] translate-x-full h-screen fixed top-0 right-0 p-6">
+      <div className={ (showCard?"translate-x-0" :"translate-x-full")+" bg-white w-[35vw] transition-all duration-300  h-screen fixed top-0 right-0 p-6"}>
         <header className="flex justify-between text-center items-center text-orange-500 font-semibold text-lg">
           <span>Order Item</span>
-          <RxCross2 className="h-6 w-6 hover:text-red-700 transition-all duration-300" />
+          <RxCross2 
+          onClick={()=>setShowCard(false)}
+          className="h-6 w-6 hover:text-red-700 transition-all duration-300" />
         </header>
       </div>
     </div>

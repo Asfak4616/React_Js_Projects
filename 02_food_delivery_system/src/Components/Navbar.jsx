@@ -4,7 +4,7 @@ import { IoSearch } from "react-icons/io5";
 import { TiShoppingCart } from "react-icons/ti";
 import { dataContext } from "../Context/UseContextData";
 const Navbar = () => {
-  const {inputData,setInputData} = useContext(dataContext)
+  const {inputData,setInputData,showCard,setShowCard} = useContext(dataContext)
   return (
     <div className=" w-full h-13 flex justify-between ">
       <div className="w-13 h-13 bg-white flex justify-center items-center rounded-md shadow-md">
@@ -20,7 +20,9 @@ const Navbar = () => {
           placeholder="Select Your Dish..."
         />
       </form>
-      <div className="w-13 h-13 bg-white flex justify-center items-center rounded-md shadow-md  relative">
+      <div 
+      onClick={()=>setShowCard(true)}
+      className="w-13 h-13 bg-white flex justify-center items-center rounded-md shadow-md  relative">
         <span className="absolute top-0 right-1 font-bold text-orange-500">0</span>
         
         <TiShoppingCart className="text-3xl cursor-pointer text-orange-500 " />
