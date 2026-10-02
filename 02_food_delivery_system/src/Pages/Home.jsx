@@ -5,9 +5,11 @@ import Card from "../Components/Card";
 import { food_items } from "../food";
 import { dataContext } from "../Context/UseContextData";
 import { RxCross2 } from "react-icons/rx";
+import Card2 from "../Components/Card2";
 
 const Home = () => {
-  const { categories, setCategories, inputData ,showCard,setShowCard} = useContext(dataContext);
+  const { categories, setCategories, inputData, showCard, setShowCard } =
+    useContext(dataContext);
   function filter(category) {
     if (category == "All") {
       setCategories(food_items);
@@ -62,13 +64,42 @@ const Home = () => {
 
       {/* Shopping Card rendering */}
 
-      <div className={ (showCard?"translate-x-0" :"translate-x-full")+" bg-white w-[35vw] transition-all duration-300  h-screen fixed top-0 right-0 p-6"}>
+      <div
+        className={
+          (showCard ? "translate-x-0" : "translate-x-full") +
+          " bg-white w-[35vw] transition-all duration-300  h-screen fixed top-0 right-0 p-6"
+        }
+      >
         <header className="flex justify-between text-center items-center text-orange-500 font-semibold text-lg">
           <span>Order Item</span>
-          <RxCross2 
-          onClick={()=>setShowCard(false)}
-          className="h-6 w-6 hover:text-red-700 transition-all duration-300" />
+          <RxCross2
+            onClick={() => setShowCard(false)}
+            className="h-6 w-6 hover:text-red-700 transition-all duration-300"
+          />
         </header>
+
+        <Card2 />
+        <div className="mt-4">
+          <hr />
+        <div className="flex justify-between mt-2 text-orange-500 font-semibold">
+          <h1>SubTotal </h1>
+          <h1>Rs 399/-</h1>
+        </div>
+        <div className="flex justify-between mt-2 text-orange-500 font-semibold">
+          <h1>Delivery Fees </h1>
+          <h1>Rs 20/-</h1>
+        </div>
+        <div className="flex justify-between mt-2 text-orange-500 font-semibold">
+          <h1>Taxes</h1>
+          <h1>Rs 1.995/-</h1>
+        </div>
+        <hr className="mt-2"/>
+        <div className="flex justify-between mt-2 text-orange-500 font-semibold">
+          <h1>Total</h1>
+          <h1>Rs 420/-</h1>
+        </div>
+        <button className="bg-orange-500 text-white w-full rounded-md mt-2 h-8 font-bold">Place Order</button>
+        </div>
       </div>
     </div>
   );
