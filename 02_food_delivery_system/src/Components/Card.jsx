@@ -2,8 +2,9 @@ import React from "react";
 
 import { LuVegan } from "react-icons/lu";
 import { GiChickenOven } from "react-icons/gi";
+import { toast } from "react-toastify";
 
-const Card = ({ name, id, price, type, image }) => {
+const Card = ({addToCart, name, id, price, type, image,quantity }) => {
   return (
     <div className="hover:border-2 hover:border-orange-500 w-50 h-70 p-4 bg-white rounded-md shadow-md flex flex-col gap-3">
       <div className="h-40 overflow-hidden rounded-md">
@@ -21,7 +22,11 @@ const Card = ({ name, id, price, type, image }) => {
           {type === "veg" ? <LuVegan /> : <GiChickenOven />} <span>{type}</span>
         </div>
       </div>
-      <button className="bg-orange-400 cursor-pointer rounded-md text-white font-medium hover:bg-orange-300 py-1 transition-all duration-300">
+      <button onClick={()=>
+      
+      {addToCart({name,id,price,image,quantity})
+      toast.success(name+  " Added...")
+      }}  className="bg-orange-400 cursor-pointer rounded-md text-white font-medium hover:bg-orange-300 py-1 transition-all duration-300">
         Add to Dish
       </button>
     </div>

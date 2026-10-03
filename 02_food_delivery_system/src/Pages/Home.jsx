@@ -6,10 +6,46 @@ import { food_items } from "../food";
 import { dataContext } from "../Context/UseContextData";
 import { RxCross2 } from "react-icons/rx";
 import Card2 from "../Components/Card2";
+import { toast } from "react-toastify";
 
 const Home = () => {
-  const { categories, setCategories, inputData, showCard, setShowCard } =
-    useContext(dataContext);
+  const {
+    categories,
+    setCategories,
+    inputData,
+    showCard,
+    setShowCard,
+    cart,
+    setCart,
+  } = useContext(dataContext);
+
+  const totalQuantity = cart.reduce((total,item)=>{
+item.quantity+total
+},0)
+
+const subTotal = cart.reduce((total,item)=>item.quantity * item.price+ total ,0)
+
+const deliveryFees = cart.length>0 ? 20 : 0;
+
+const taxes = subTotal * 0.05;
+
+const total = subTotal+ deliveryFees + taxes;
+
+  const addToCart = (food) => {
+    let isExist = cart.find((item) => item.id == food.id);
+    if (isExist) {
+      const newCart = cart.map((item) => {
+        return item.id == food.id
+          ? { ...item, quantity: item.quantity + 1 }
+          : item;
+      });
+      setCart(newCart);
+    } else {
+      setCart([...cart, food]);
+    }
+    setShowCard(true);
+  };
+
   function filter(category) {
     if (category == "All") {
       setCategories(food_items);
@@ -28,7 +64,7 @@ const Home = () => {
   }, [inputData]);
   return (
     <div className="w-full min-h-screen bg-slate-300 py-2 px-4 md:px-6 md:py-4 ">
-      <Navbar />
+      <Navbar totalQuantity={totalQuantity}/>
 
       {inputData ? null : (
         <div className="flex flex-wrap justify-center gap-8 mt-4 ">
@@ -48,15 +84,22 @@ const Home = () => {
       )}
 
       <div className="flex flex-wrap  justify-center items-center mt-5  gap-4 mb-4">
+        {categories.length == 0 && 
+       <div className="text-orange-500 font-semibold text-2xl mt-10">
+        No Dish Found
+       </div>
+        }
         {categories.map((item, index) => {
           return (
             <Card
               key={index}
+              addToCart={addToCart}
               name={item.food_name}
               price={item.price}
               type={item.food_type}
               id={item.id}
               image={item.food_image}
+              quantity={item.food_quantity}
             />
           );
         })}
@@ -67,7 +110,7 @@ const Home = () => {
       <div
         className={
           (showCard ? "translate-x-0" : "translate-x-full") +
-          " bg-white w-[35vw] transition-all duration-300  h-screen fixed top-0 right-0 p-6"
+          " bg-white w-[40vw] overflow-auto transition-all duration-300  h-screen fixed top-0 right-0 p-6"
         }
       >
         <header className="flex justify-between text-center items-center text-orange-500 font-semibold text-lg">
@@ -78,28 +121,50 @@ const Home = () => {
           />
         </header>
 
-        <Card2 />
-        <div className="mt-4">
+        {cart.map((item, index) => {
+          return (
+            <Card2
+              key={index}
+              price={item.price}
+              id={item.id}
+              name={item.name}
+              image={item.image}
+              quantity={item.quantity}
+            />
+          );
+        })}
+
+        {
+          cart.length>0 ? 
+    
+          <div className="mt-4">
           <hr />
-        <div className="flex justify-between mt-2 text-orange-500 font-semibold">
-          <h1>SubTotal </h1>
-          <h1>Rs 399/-</h1>
+          <div className="flex justify-between mt-2 text-orange-500 font-semibold">
+            <h1>SubTotal </h1>
+            <h1>Rs {subTotal.toFixed(2)}/-</h1>
+          </div>
+          <div className="flex justify-between mt-2 text-orange-500 font-semibold">
+            <h1>Delivery Fees </h1>
+            <h1>Rs {deliveryFees.toFixed(2)}/-</h1>
+          </div>
+          <div className="flex justify-between mt-2 text-orange-500 font-semibold">
+            <h1>Taxes</h1>
+            <h1>Rs {taxes.toFixed(2)}/-</h1>
+          </div>
+          <hr className="mt-2" />
+          <div className="flex justify-between mt-2 text-orange-500 font-semibold">
+            <h1>Total</h1>
+            <h1>Rs {total.toFixed(2)}/-</h1>
+          </div>
+          <button onClick={()=>toast.success("Order is placed")} className="bg-orange-500 text-white w-full rounded-md mt-2 h-8 font-bold">
+            Place Order
+          </button>
         </div>
-        <div className="flex justify-between mt-2 text-orange-500 font-semibold">
-          <h1>Delivery Fees </h1>
-          <h1>Rs 20/-</h1>
-        </div>
-        <div className="flex justify-between mt-2 text-orange-500 font-semibold">
-          <h1>Taxes</h1>
-          <h1>Rs 1.995/-</h1>
-        </div>
-        <hr className="mt-2"/>
-        <div className="flex justify-between mt-2 text-orange-500 font-semibold">
-          <h1>Total</h1>
-          <h1>Rs 420/-</h1>
-        </div>
-        <button className="bg-orange-500 text-white w-full rounded-md mt-2 h-8 font-bold">Place Order</button>
-        </div>
+      : <div className="w-full mt-15 flex justify-center text-orange-500 text-2xl font-semibold">
+        Cart is Empty
+      </div>
+        }
+      
       </div>
     </div>
   );

@@ -3,7 +3,7 @@ import { IoFastFoodOutline } from "react-icons/io5";
 import { IoSearch } from "react-icons/io5";
 import { TiShoppingCart } from "react-icons/ti";
 import { dataContext } from "../Context/UseContextData";
-const Navbar = () => {
+const Navbar = ({totalQuantity}) => {
   const {inputData,setInputData,showCard,setShowCard} = useContext(dataContext)
   return (
     <div className=" w-full h-13 flex justify-between ">
@@ -23,7 +23,7 @@ const Navbar = () => {
       <div 
       onClick={()=>setShowCard(true)}
       className="w-13 h-13 bg-white flex justify-center items-center rounded-md shadow-md  relative">
-        <span className="absolute top-0 right-1 font-bold text-orange-500">0</span>
+        <span className="absolute top-0 right-1 font-bold text-orange-500">{totalQuantity}</span>
         
         <TiShoppingCart className="text-3xl cursor-pointer text-orange-500 " />
       </div>

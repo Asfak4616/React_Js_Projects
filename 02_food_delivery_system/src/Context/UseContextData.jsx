@@ -6,8 +6,8 @@ export const dataContext = createContext();
 const UseContextData = ({ children }) => {
   const [categories, setCategories] = useState(food_items);
   const [inputData,setInputData] = useState("")
-
-   const [showCard,setShowCard] = useState(true)
+   const [showCard,setShowCard] = useState(false)
+ const [cart, setCart] = useState([]);
 
   const data = {
     categories,
@@ -15,7 +15,9 @@ const UseContextData = ({ children }) => {
     inputData,
     setInputData,
     showCard,
-    setShowCard
+    setShowCard,
+    cart,
+    setCart
   };
 
   return (
